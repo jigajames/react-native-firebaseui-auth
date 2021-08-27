@@ -25,7 +25,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import Auth from 'react-native-firebaseui-auth';
+import Auth from 'react-native-firebaseui-auth-min';
 
 const App: () => React$Node = () => {
   return (

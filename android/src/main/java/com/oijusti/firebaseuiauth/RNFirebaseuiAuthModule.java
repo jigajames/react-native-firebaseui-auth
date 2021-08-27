@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -221,6 +222,8 @@ public class RNFirebaseuiAuthModule extends ReactContextBaseJavaModule {
     resultData.putBoolean("isNewUser", isNewUser);
     resultData.putDouble("creationTimestamp", user.getMetadata().getCreationTimestamp());
     resultData.putDouble("lastSignInTimestamp", user.getMetadata().getLastSignInTimestamp());
+    Task<GetTokenResult> idToken = user.getIdToken(false);
+    resultData.putString("idToken", idToken.getResult().getToken());
     return resultData;
   }
 }
