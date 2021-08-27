@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -156,6 +157,28 @@ public class RNFirebaseuiAuthModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void getCurrentIdToken(final Promise promise) {
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    if (user != null) {
+      Task<GetTokenResult> idTokenTask = user.getIdToken(false);
+      idTokenTask.addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+        @Override
+        public void onComplete(@NonNull Task<GetTokenResult> task) {
+          if(task.isSuccessful()){
+            String idToken = task.getResult().getToken();
+            promise.resolve(idToken);
+          }else {
+            Log.e("RNFirebaseuiAuthModule", "task get id token is fail", task.getException());
+            promise.resolve(null);
+          }
+        }
+      });
+      return;
+    }
+    promise.resolve(null);
+  }
+
+  @ReactMethod
   public void signOut(final Promise promise) {
     Context context = getReactApplicationContext();
     AuthUI.getInstance()
@@ -222,8 +245,6 @@ public class RNFirebaseuiAuthModule extends ReactContextBaseJavaModule {
     resultData.putBoolean("isNewUser", isNewUser);
     resultData.putDouble("creationTimestamp", user.getMetadata().getCreationTimestamp());
     resultData.putDouble("lastSignInTimestamp", user.getMetadata().getLastSignInTimestamp());
-    Task<GetTokenResult> idToken = user.getIdToken(false);
-    resultData.putString("idToken", idToken.getResult().getToken());
     return resultData;
   }
 }

@@ -11,7 +11,6 @@ declare namespace RNFirebaseuiAuth {
     isNewUser: boolean;
     creationTimestamp: number;
     lastSignInTimestamp: number;
-    idToken: string;
   };
 
   interface Config {
@@ -26,4 +25,6 @@ declare namespace RNFirebaseuiAuth {
   export function signIn(config: Config): Promise<User>;
   export function getCurrentUser(): Promise<User|null>;
   export function signOut(): Promise<boolean>;
+  export function getCurrentIdToken(): Promise<string|null>;
+
 }
