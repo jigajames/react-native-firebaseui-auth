@@ -16,10 +16,8 @@
 
 #import "FUICustomAuthPickerViewController.h"
 #import "FUICustomEmailEntryViewController.h"
-#import "FUICustomPasswordSignInViewController.h"
 #import "FUICustomPasswordSignUpViewController.h"
 #import "FUICustomPasswordRecoveryViewController.h"
-#import "FUICustomPasswordVerificationViewController.h"
 
 @interface RNFirebaseuiAuth : NSObject <RCTBridgeModule, FUIAuthDelegate>
 
