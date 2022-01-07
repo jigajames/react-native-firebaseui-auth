@@ -14,11 +14,6 @@
 #import <FirebasePhoneAuthUI/FirebasePhoneAuthUI.h>
 #import <FirebaseAnonymousAuthUI/FirebaseAnonymousAuthUI.h>
 
-#import "FUICustomAuthPickerViewController.h"
-#import "FUICustomEmailEntryViewController.h"
-#import "FUICustomPasswordSignUpViewController.h"
-#import "FUICustomPasswordRecoveryViewController.h"
-
 @interface RNFirebaseuiAuth : NSObject <RCTBridgeModule, FUIAuthDelegate>
 
 @end
